@@ -48,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: vscode-extension
-          path: *.vsix
+          path: "*.vsix"
