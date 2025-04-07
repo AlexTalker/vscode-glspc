@@ -11,7 +11,7 @@ on:
         description: "Branch to build from"
         required: true
         type: string
-        default: "${{ github.ref_name }}"
+        default: "main"
 
 env:
   GIT_BRANCH: "${{ inputs.branch || github.ref_name }}"
