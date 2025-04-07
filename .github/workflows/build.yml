@@ -5,6 +5,16 @@ on:
   pull_request:
     branches:
       - '**'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to build from"
+        required: true
+        type: string
+        default: "${{ github.ref_name }}"
+
+env:
+  GIT_BRANCH: "${{ inputs.branch || github.ref_name }}"
 
 jobs:
   build:
@@ -16,8 +26,10 @@ jobs:
         ]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout vscode-glspc
+      - name: Checkout vscode-glsp on ${GIT_BRANCH}
         uses: actions/checkout@v3
+        with:
+          ref: "${GIT_BRANCH}"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
