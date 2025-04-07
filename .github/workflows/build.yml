@@ -26,10 +26,10 @@ jobs:
         ]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout vscode-glsp on ${GIT_BRANCH}
+      - name: Checkout vscode-glsp on ${{ env.GIT_BRANCH }}
         uses: actions/checkout@v3
         with:
-          ref: "${GIT_BRANCH}"
+          ref: "${{ env.GIT_BRANCH }}"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
