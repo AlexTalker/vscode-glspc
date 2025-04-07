@@ -22,7 +22,10 @@ function startServer() {
   if (serverCommand) {
     const serverCommandArguments: string[] =
       config.get("serverCommandArguments") ?? []
-    const languageId: string = config.get("languageId") ?? ""
+    const languageId: string|string[] = config.get<string>("languageId", "") ?? config.get<string[]>("languageId", [])
+    const languageIds: string[] = typeof languageId === "string"
+      ? (languageId.length ? [ languageId ] : [])
+      : languageId;
     const initializationOptions: object =
       config.get("initializationOptions") ?? {}
     const environmentVariables: Record<string, unknown> =
@@ -68,7 +71,7 @@ function startServer() {
     }
 
     const clientOptions: LanguageClientOptions = {
-      documentSelector: [languageId],
+      documentSelector: languageIds,
       diagnosticCollectionName: "glspc",
       initializationOptions,
     }
