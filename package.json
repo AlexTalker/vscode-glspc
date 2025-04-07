@@ -66,10 +66,24 @@
           "description": "Command-line arguments to pass to the LSP server. Example: [\"lsp\"]"
         },
         "glspc.languageId": {
-          "scope": "window",
-          "type": "string",
-          "default": "",
-          "description": "The language id for which the server will be used. Example: python."
+          "oneOf": [
+            {
+              "scope": "window",
+              "type": "string",
+              "default": "",
+              "description": "The language id for which the server will be used. Example: python."
+            },
+            {
+              "scope": "window",
+              "type": "array",
+              "default": [],
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "The language id for which the server will be used. Example: python."
+            }
+          ]
         },
         "glspc.environmentVariables": {
           "scope": "window",
